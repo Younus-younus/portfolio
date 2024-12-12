@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Portfolio {
+  id          String     @id
+  describeYou String?
+  description String
+  name        String
+  userId      String?
+  contact     Contact?
+  education   Education?
+  images      Image[]
+  interest    Interest?
+  languages   Language[]
+  likes       Like[]
+  user        User?      @relation(fields: [userId], references: [id])
+  skills       Skill[]
+}
+
+model Contact {
+  id          String    @id @default(uuid()) // Ensure this is set
+  contact     String
+  gmail       String
+  address     String
+  portfolioId String    @unique
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+}
+
+model Education {
+  id          String    @id @default(uuid())
+  course      String
+  institute   String
+  portfolioId String    @unique
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+}
+
+model Skill {
+  id          String    @id @default(uuid())
+  skill       String
+  portfolioId String
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+}
+
+model Interest {
+  id          String    @id @default(uuid())
+  interest    String
+  portfolioId String    @unique
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+}
+
+model Language {
+  language    String
+  portfolioId String
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+
+  @@id([portfolioId, language])
+}
+
+model Image {
+  id          String    @id @default(uuid())
+  userId      String
+  portfolioId String
+  imageUrl    String    @default("https://...")
+  imageName   String?
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id         String      @id
+  password   String
+  username   String      @unique
+  images     Image[]
+  likes      Like[]
+  portfolios Portfolio[]
+}
+
+model Like {
+  id          String    @id @default(uuid())
+  userId      String
+  portfolioId String
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, portfolioId])
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  sid       String   @unique
+  expiresAt DateTime
+  data      String
+}

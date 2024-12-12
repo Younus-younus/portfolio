@@ -1,0 +1,281 @@
+<% layout("/layout/boilerplate.ejs") %>
+<style>
+body {
+    background-color: #021526;
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    margin: 0 0 0 0 !important;
+    padding: 0 !important;
+
+}
+.container1 {
+    display: flex;
+    flex-direction: row;
+    margin: 0px !important;
+    padding: 0 !important;
+    height: 100vh;
+}
+#navbar {
+    background-color: #122F53 !important;
+    height: 80px !important;
+    z-index: 1000 !important;
+    top: 0 !important; 
+    position: fixed !important;
+    width: 100%;
+}
+* {
+    color: white !important;
+    font-size: 20px;
+}
+#homeIcon {
+    font-size: 30px !important;
+    margin-right: 0;
+    margin-left: 1rem;
+    transition: transform 0.3s ease !important;
+}
+#homeIcon:hover {
+    transform: scale(2, 1) !important;
+    margin-right: 1rem;
+}
+.nav-item {
+    opacity: 0.9 !important;
+    margin-right: 1rem;
+    margin-left: 0;
+}
+.nav-item:hover {
+    opacity: 1 !important;
+    font-size: 21px;
+}
+.nav-link {
+    text-decoration: none;
+}
+.leftPanel {
+    display: flex;
+    flex-direction: column;
+    width: 370px !important;
+    background-color: #0F1D2F;
+    margin-left: 0;
+    align-items: center;
+    position: fixed;
+    height: 100%;
+}
+.leftPanel p {
+    opacity: 0.8;
+}
+.leftPanel p:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.image{
+    width: 259px;
+    height: 248px;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    margin-top: 5rem;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+.rightPanel {
+    height: 100vh;
+    margin-left: 20rem;
+    margin-top: 5rem;
+}
+.rightPanel li {
+    opacity: 0.8;
+    font-size: medium;
+    margin-left: 3rem;
+}
+.rightPanel h6{
+    margin-top: 1rem;
+}
+.rightPanel h5{
+    opacity: 0.5;
+    font-size: medium;
+}
+.container2 {
+    display: flex;
+    margin-top: 6rem !important;
+    flex-direction: column;
+    margin-left: 8rem !important;
+    width: 100% !important;
+}
+.card {
+    background-color: #122F53 !important;
+    height: 100px !important;
+    margin-left: 1rem;
+    width: 100%;
+    margin-bottom: 0 !important;
+    align-items: start !important;
+    display: flex !important;
+    flex-direction: row !important;
+}
+.cardBody {
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+.items {
+    position: relative;
+    bottom: 3rem;
+    right: -930px;
+    display: inline;
+}
+.home-img img {
+    width: 97px;
+    height: 98px;
+}
+/* .card-text {
+    font-size: 15px;
+} */
+input, textarea {
+    color: black !important; /* Input text color */
+    background-color: white !important; /* Input background color */
+}
+
+#badge{
+    background-color: #0759a1;
+    color: white !important;
+    border: none;
+    height: 40px;
+    font-size: medium;
+    margin-top: 0.5rem;
+}
+#badge2{
+    color: white !important;
+    border: none;
+    font-size: medium;
+    height: 40px;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+}
+.delete {
+    display: flex;
+    flex-direction: row;
+}
+.border {
+    border-radius: 10px;
+    height: 70%;
+}
+.alert {
+    height: 60px !important;
+    margin-top: 5rem!important;
+    z-index: 1000 !important;
+    padding: 1 !important;
+    display: inline !important;
+    position: absolute !important;
+    width: auto !important;
+    background-color: #1a054d !important;
+    color: antiquewhite;
+}
+
+#like-button {
+    background-color: #0759a1;
+    border: none;
+    position: fixed;
+    right: 15rem;
+    bottom: 1rem;
+    width: 60px;
+    height: 50px;
+}
+#like-button i {
+    font-size: 30px;
+}
+
+@media screen and (max-width: 1198px) {
+    .items {
+        right: -730px;
+    }
+    .leftPanel {
+        width: 200px !important;
+    }
+    .image {
+        width: 150px;
+        height: 150px;
+    }
+    .rightPanel {
+        margin-left: 12rem;
+    }
+    #like-button {
+        right: 3rem;
+        bottom: 7rem;
+    }
+}
+@media screen and (max-width: 990px) {
+    .card {
+        width: 700px;
+    }
+    .items {
+        right: -630px;
+    }
+    .container2 {
+        margin-left: 0.5rem !important;
+    }
+}
+@media screen and (max-width: 743px) {
+    .card {
+        margin-right: 0.5rem !important;
+        width: 600px;
+    }
+    .items {
+        right: -550px;
+    }
+    .container2 {
+        margin-right: 0.5rem !important;
+    }
+}
+@media screen and (max-width: 646px) {
+    .card {
+        margin-right: 0.2rem !important;
+        width: 540px;
+    }
+    .anchor {
+        margin-right: 0.5rem !important;
+    }
+    .items {
+        right: -505px;
+        margin-right: 2rem;
+    }
+    .container2 {
+        margin-left: 0.2rem !important;
+        margin-right: 0.5rem !important;
+    }
+    .leftPanel {
+        width: 150px !important;
+    }
+    .image {
+        width: 100px;
+        height: 100px;
+    }
+    .rightPanel {
+        margin-left: 9rem;
+        margin-right: 1rem;
+    }
+    .login {
+        margin-left: 1rem !important;
+        margin-right: 4rem !important;
+    }
+}
+</style>
+<div class="container2">
+<% for (let i of portfolios) { %>
+    <a href="/portfolio/<%= i.id %>" style="text-decoration: none;">
+        <div class="card">
+              <div class="home-img">
+                <img src="<%= i.image_url ? i.image_url : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAV5KVoFMQYRrmaeJrVnTpV_dtjzlNBWkpqfKdeM12t4hu2sPoXKACj0VJjUr42ePTLpM&usqp=CAU' %>" class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="cardBody">
+                <h5><%= i.name %></h5>
+                <p><%= i.describe_you %></p>
+              </div>
+          </div>
+          <div class="items">
+            <i class="fa-regular fa-thumbs-up"></i>
+            <span><%= i.like_count %></span>
+          </div>
+    </a>
+<% } %>
+</div>
+</div>

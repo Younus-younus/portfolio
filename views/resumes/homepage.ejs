@@ -1,0 +1,38 @@
+<% layout("/layout/boilerplate.ejs") %>
+    <div class="container2">
+        <a href="/portfolio/author" style="text-decoration: none;" class="anchor">
+            <div class="card">
+                    <div class="home-img">
+                        <img src="/assets/Logo.jpg" class="img-fluid rounded-start" alt="author">
+                    </div>
+                        <div class="cardBody">
+                            <h5>Younus</h5>
+                            <p>FullStack Developer</p>
+                        </div>
+            </div>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+        </a>
+    
+        <% for (let i of portfolios) { %>
+            <a href="/portfolio/<%= i.id %>" style="text-decoration: none;">
+                <div class="card">
+                      <div class="home-img">
+                        <img src="<%= i.image_url %>" class="img-fluid rounded-start" alt="...">
+                      </div>
+                      <div class="cardBody">
+                        <h5><%= i.name %></h5>
+                        <p><%= i.describeYou %></p>
+                      </div>
+                  </div>
+                  <div class="items">
+                    <i class="fa-regular fa-thumbs-up"></i>
+                    <span><%= i.like_count %></span>
+                  </div>
+            </a>
+        <% } %>
+    </div>
+</div>
+

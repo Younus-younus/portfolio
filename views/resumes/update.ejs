@@ -1,0 +1,391 @@
+<% layout("/layout/boilerplate.ejs") %>
+<style>
+    input, textarea {
+    color: black !important; /* Input text color */
+    background-color: white !important; /* Input background color */
+}
+body {
+    background-color: #021526;
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    margin: 0 0 0 0 !important;
+    padding: 0 !important;
+
+} 
+.container1 {
+    display: flex;
+    flex-direction: row;
+    margin: 0px !important;
+    padding: 0 !important;
+    height: 100vh;
+}
+#navbar {
+    background-color: #122F53 !important;
+    height: 80px !important;
+    z-index: 1000 !important;
+    top: 0 !important; 
+    position: fixed !important;
+    width: 100%;
+}
+* {
+    color: white !important;
+    font-size: 20px;
+}
+#homeIcon {
+    font-size: 30px !important;
+    margin-right: 0;
+    margin-left: 1rem;
+    transition: transform 0.3s ease !important;
+}
+#homeIcon:hover {
+    transform: scale(2, 1) !important;
+    margin-right: 1rem;
+}
+.nav-item {
+    opacity: 0.9 !important;
+    margin-right: 1rem;
+    margin-left: 0;
+}
+.nav-item:hover {
+    opacity: 1 !important;
+    font-size: 21px;
+}
+.nav-link {
+    text-decoration: none;
+}
+.leftPanel {
+    display: flex;
+    flex-direction: column;
+    width: 370px !important;
+    background-color: #0F1D2F;
+    margin-left: 0;
+    align-items: center;
+    position: fixed;
+    height: 100%;
+}
+.leftPanel p {
+    opacity: 0.8;
+}
+.leftPanel p:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.image{
+    width: 259px;
+    height: 248px;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    margin-top: 5rem;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+.rightPanel {
+    height: 100vh;
+    margin-left: 20rem;
+    margin-top: 5rem;
+}
+.rightPanel li {
+    opacity: 0.8;
+    font-size: medium;
+    margin-left: 3rem;
+}
+.rightPanel h6{
+    margin-top: 1rem;
+}
+.rightPanel h5{
+    opacity: 0.5;
+    font-size: medium;
+}
+.container2 {
+    display: flex;
+    margin-top: 6rem !important;
+    flex-direction: column;
+    margin-left: 8rem !important;
+    width: 100% !important;
+}
+.card {
+    background-color: #122F53 !important;
+    height: 100px !important;
+    margin-left: 1rem;
+    width: 100%;
+    margin-bottom: 0 !important;
+    align-items: start !important;
+    display: flex !important;
+    flex-direction: row !important;
+}
+.cardBody {
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+.items {
+    position: relative;
+    bottom: 3rem;
+    right: -930px;
+    display: inline;
+}
+.home-img img {
+    width: 97px;
+    height: 98px;
+}
+/* .card-text {
+    font-size: 15px;
+} */
+input, textarea {
+    color: black !important; /* Input text color */
+    background-color: white !important; /* Input background color */
+}
+
+#badge{
+    background-color: #0759a1;
+    color: white !important;
+    border: none;
+    height: 40px;
+    font-size: medium;
+    margin-top: 0.5rem;
+}
+#badge2{
+    color: white !important;
+    border: none;
+    font-size: medium;
+    height: 40px;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+}
+.delete {
+    display: flex;
+    flex-direction: row;
+}
+.border {
+    border-radius: 10px;
+    height: 70%;
+}
+.alert {
+    height: 60px !important;
+    margin-top: 5rem!important;
+    z-index: 1000 !important;
+    padding: 1 !important;
+    display: inline !important;
+    position: absolute !important;
+    width: auto !important;
+    background-color: #1a054d !important;
+    color: antiquewhite;
+}
+
+#like-button {
+    background-color: #0759a1;
+    border: none;
+    position: fixed;
+    right: 15rem;
+    bottom: 1rem;
+    width: 60px;
+    height: 50px;
+}
+#like-button i {
+    font-size: 30px;
+}
+
+@media screen and (max-width: 1198px) {
+    .items {
+        right: -730px;
+    }
+    .leftPanel {
+        width: 200px !important;
+    }
+    .image {
+        width: 150px;
+        height: 150px;
+    }
+    .rightPanel {
+        margin-left: 12rem;
+    }
+    #like-button {
+        right: 3rem;
+        bottom: 7rem;
+    }
+}
+@media screen and (max-width: 990px) {
+    .card {
+        width: 700px;
+    }
+    .items {
+        right: -630px;
+    }
+    .container2 {
+        margin-left: 0.5rem !important;
+    }
+}
+@media screen and (max-width: 743px) {
+    .card {
+        margin-right: 0.5rem !important;
+        width: 600px;
+    }
+    .items {
+        right: -550px;
+    }
+    .container2 {
+        margin-right: 0.5rem !important;
+    }
+}
+@media screen and (max-width: 646px) {
+    .card {
+        margin-right: 0.2rem !important;
+        width: 540px;
+    }
+    .anchor {
+        margin-right: 0.5rem !important;
+    }
+    .items {
+        right: -505px;
+        margin-right: 2rem;
+    }
+    .container2 {
+        margin-left: 0.2rem !important;
+        margin-right: 0.5rem !important;
+    }
+    .leftPanel {
+        width: 150px !important;
+    }
+    .image {
+        width: 100px;
+        height: 100px;
+    }
+    .rightPanel {
+        margin-left: 9rem;
+        margin-right: 1rem;
+    }
+    .login {
+        margin-left: 1rem !important;
+        margin-right: 4rem !important;
+    }
+}
+</style>
+
+<div style="color: black;">
+    <br><br><br><br><br>
+    <form method="POST" action="/portfolio/<%= portfolio.id %>?_method=PUT" class="row g-3 needs-validation offset-1" novalidate enctype="multipart/form-data">
+        <h4>Update Your Portfolio</h4>
+      <h5>Your Details</h5>
+      <div class="col-md-4 position-relative">
+        <label for="fullName" class="form-label">Full Name</label>
+        <input type="text" class="form-control" id="fullName" name="name" value="<%= portfolio.name %>" required>
+        <div class="valid-tooltip">
+          Looks good!
+        </div>
+      </div>
+      <div class="col-md-4 position-relative">
+        <label for="description" class="form-label">What Describe's You?</label>
+        <input type="text" class="form-control" id="description" name="describe_you" value="<%= portfolio.describeYou %>" required>
+        <div class="valid-tooltip">
+          Looks good!
+        </div>
+      </div>
+  
+      <div class="col-md-6 position-relative">
+        <label for="shortDescription" class="form-label">Description</label>
+        <textarea class="form-control" id="shortDescription" name="description"required><%= portfolio.description %> </textarea>
+        <div class="invalid-tooltip">
+          Please provide a short description.
+        </div>
+      </div>
+      <div class="col-md-7 position-relative">
+        <br>
+        <div>
+          <p>Original Images</p>
+          <% images.forEach((image) => { %>
+            <img src="/<%= image.imageUrl %>" alt="img" style="width: 50px;">
+          <% }); %>
+        </div> <br>
+        <label for="imageform" class="form-label">Upload Image</label>
+      <input class="form-control" id="imageform" name="image" type="file" >
+        <br>
+      </div>
+  
+      <!-- Contact Details -->
+      <div class="row">
+        <h5>Your Contact Details</h5>
+        <div class="col-md-5 position-relative">
+          <label for="phoneNumber" class="form-label">Phone Number</label>
+          <input type="text" class="form-control" id="phoneNumber" name="contact" value="<%= contact.contact %>" required>
+          <div class="invalid-tooltip">
+            Please provide your contact details.
+          </div>
+        </div>
+        <div class="col-md-6 position-relative">
+          <label for="email" class="form-label">Gmail</label>
+          <input type="email" class="form-control" id="email" name="gmail" value="<%= contact.gmail %>" required>
+          <div class="invalid-tooltip">
+            Please provide your email address.
+          </div>
+        </div>
+        <div class="col-md-6 position-relative">
+          <label for="address" class="form-label">Address</label>
+          <textarea class="form-control" id="address" name="address" required><%= contact.address %></textarea>
+          <div class="invalid-tooltip">
+            Please provide your current address.
+          </div>
+        </div>
+      </div>
+  
+      <!-- Education Details -->
+      <div>
+        <h5>Your Education Details</h5>
+        <div class="col-md-6 position-relative">
+          <label for="institute" class="form-label">Institute/University Name</label>
+          <input type="text" class="form-control" id="institute" name="institute" value="<%= education.institute %>" required>
+          <div class="invalid-tooltip">
+            Please provide your institute/university name.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 position-relative">
+        <label for="course" class="form-label">Course Name</label>
+        <input type="text" class="form-control" id="course" name="course" value="<%= education.course %>" required>
+        <div class="invalid-tooltip">
+          Please provide your course name.
+        </div>
+        <br><br>
+      </div>
+  
+      <!-- Other Details -->
+      <div class="row">
+        <h5>Other Details</h5>
+        <div class="col-md-6 position-relative">
+          <label for="skills" class="form-label">Skill/Expertised In?</label>
+          <input type="text" class="form-control" id="skills" name="skill" value="<%= skills %>" required>
+          <div class="invalid-tooltip">
+            Please provide your skills or expertise.
+          </div>
+          <br>
+        </div>
+        <div class="col-md-6 position-relative">
+            <br>
+          <label for="interests" class="form-label">Interests In?</label>
+          <input type="text" class="form-control" id="interests" name="interest" value="<%= interests.interest %>" required>
+          <div class="invalid-tooltip">
+            Please provide your interests.
+          </div>
+        </div>
+  
+        <div class="col-md-6 position-relative">
+          <br>
+          <label for="languages" class="form-label">Languages Known?</label>
+          <input type="text" class="form-control" id="languages" name="language" value="<%= languages %>"required>
+          <div class="invalid-tooltip">
+            Please provide the languages you know.
+          </div>
+        </div>
+      </div>
+  
+      <!-- Submit Button -->
+      <div class="col-12">
+        <br>
+        <button class="btn" style="background-color: rgb(41, 43, 145);" type="submit">Submit Details</button>
+        <br><br>
+      </div>
+    </form>
+  </div>
+  

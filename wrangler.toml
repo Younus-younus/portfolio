@@ -1,0 +1,5 @@
+name = "backend"
+compatibility_date = "0.0.1"
+
+[vars]
+DATABASE_URL = "prisma+postgres://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiOGJkZDc3OGUtMmZmMC00NTg2LTgxNDgtYTFjYjQ1MzQzNmMwIiwidGVuYW50X2lkIjoiNjExNGFlNzQ0MjJkOGNjZjRhYWRkZDRmNjI4ZjdiNmExNWEzNTA4NGViODljZjQ1YWMyM2E5OGEyOWZjNGQ2OCIsImludGVybmFsX3NlY3JldCI6IjIwM2Y0MjQ0LTM4NWUtNDhkNC1hZDU1LTRhZGQ4OWE4NzViOSJ9.4UQDXhc1ItZWxCLdb1ls5fWvrAyVua3FeRVwP8REi7s"

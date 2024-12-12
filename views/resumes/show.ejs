@@ -1,0 +1,131 @@
+<% layout("/layout/boilerplate.ejs") %>
+
+<div class="container1">
+    <div class='leftPanel'>
+        <div>
+            <% if (images.length > 0) { %>
+                <% images.forEach((image) => { %>
+                    <img src="/<%= image.imageUrl %>" alt="img" class="image">
+                  <% }); %>
+            <% } else { %>
+                <p>No profile image available.</p>
+            <% } %>
+        </div>
+        <div>
+            <p onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Contact</p>
+            <p onclick="document.getElementById('education').scrollIntoView({ behavior: 'smooth' })">Education</p>
+            <p onclick="document.getElementById('expertise').scrollIntoView({ behavior: 'smooth' })">Expertise</p>
+            <p onclick="document.getElementById('interest').scrollIntoView({ behavior: 'smooth' })">Interest</p>
+            <p onclick="document.getElementById('language').scrollIntoView({ behavior: 'smooth' })">Language</p>
+        </div>
+    </div>
+    <div class='rightPanel'>
+        <div id='description'>
+            <div class="delete">
+                <h2><%= portfolio.name %> </h2>
+                <% if (CurrUser && CurrUser.id === portfolio.userId) { %>
+                    <a href="/portfolio/<%= portfolio.id %>/edit" class="btn btn-danger" id="badge2">Edit here</a>
+                    &nbsp;
+                    <form method="POST" action="/portfolio/<%= portfolio.id %>?_method=DELETE">
+                        <button class="btn btn-primary" id="badge">Delete</button>
+                    </form>
+                <% } %>
+                <form method="POST" action="/portfolio/<%= portfolio.id %>/like">
+                    <% if (hasLiked) { %>
+                        <button id="like-button"><i class="fa-solid fa-heart"></i></button>
+                    <% } else { %>
+                        <button id="like-button"><i class="fa-regular fa-heart"></i></button>
+                    <% } %>
+                </form>
+            </div>
+            <h5><%= portfolio.describeYou %></h5>
+        </div>
+
+        <!-- Description -->
+        <div id='contact'>
+            <h6>Description</h6>
+            <li><%= portfolio.description %></li>
+        </div>
+        <hr />
+
+        <!-- Contact Info -->
+        <div id='education'>
+            <h6>Contact Info</h6>
+            <% if (contact.length > 0) { %>
+                <ul>
+                    <% contact.forEach(c => { %>
+                        <li><strong>Gmail:</strong> <%= c.gmail %></li>
+                        <li><strong>Phone:</strong> <%= c.contact %></li>
+                        <li><strong>Address:</strong> <%= c.address %></li>
+                    <% }) %>
+                </ul>
+            <% } else { %>
+                <p>No contact information available.</p>
+            <% } %>
+        </div>
+        <hr />
+
+        <!-- Education Info -->
+        <div id='expertise'>
+            <h6>Education Info</h6>
+            <% if (education.length > 0) { %>
+                <ul>
+                    <% education.forEach(e => { %>
+                        <li><strong>Institute:</strong> <%= e.institute %></li>
+                        <li><strong>Course:</strong> <%= e.course %></li>
+                    <% }) %>
+                </ul>
+            <% } else { %>
+                <p>No education information available.</p>
+            <% } %>
+        </div>
+        <hr />
+
+        <!-- Skills and Expertise -->
+        <div id='interest'>
+            <h6>Skills and Expertise</h6>
+            <% if (skills.length > 0) { %>
+                <ul>
+                    <% skills.forEach(s => { %>
+                        <% if (s.skill) { %>
+                            <li><%= s.skill %></li>
+                        <% } %>
+                    <% }) %>
+                </ul>
+            <% } else { %>
+                <p>No skills information available.</p>
+            <% } %>
+        </div>
+        <hr />
+
+        <!-- Interests -->
+        <div id='language'>
+            <h6>Interests</h6>
+            <% if (interests.length > 0) { %>
+                <ul>
+                    <% interests.forEach(i => { %>
+                        <li><%= i.interest %></li>
+                    <% }) %>
+                </ul>
+            <% } else { %>
+                <p>No interests available.</p>
+            <% } %>
+        </div>
+        <hr />
+
+        <!-- Languages -->
+        <div>
+            <h6>Languages Known</h6>
+            <% if (languages.length > 0) { %>
+                <ul>
+                    <% languages.forEach(lang => { %>
+                        <li><%= lang.language %></li>
+                    <% }) %>
+                </ul>
+            <% } else { %>
+                <p>No language information available.</p>
+            <% } %>
+        </div>
+        <br />
+    </div>
+</div>
