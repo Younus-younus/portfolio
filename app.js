@@ -141,6 +141,31 @@ app.get('/', async (req, res) => {
     res.status(500).send('Error fetching portfolios.');
   }
 });
+app.get('/portfolio', async (req, res) => {
+  try {
+    const portfolios = await prisma.portfolio.findMany({
+      include: {
+        images: { take: 1 }, // Fetch only the first image per portfolio
+        _count: { select: { likes: true } }, // Count likes
+      },
+    });
+
+    const portfolioData = portfolios.map((portfolio) => ({
+      ...portfolio,
+      image_url: portfolio.images?.[0]?.imageUrl || '/images/placeholder.png', // Default to a placeholder image
+      like_count: portfolio._count.likes, // Include like count
+      describeYou: portfolio.describeYou,
+    }));
+
+    res.render('resumes/homepage', {
+      portfolios: portfolioData,
+      CurrUser: req.user || null, // Current user
+    });
+  } catch (error) {
+    console.error('Error fetching portfolios:', error.message, error.stack);
+    res.status(500).send('Error fetching portfolios.');
+  }
+});
 
 app.get('/portfolio/my', isLoggedIn, async (req, res) => {
   try {
@@ -411,7 +436,7 @@ app.post('/portfolio', upload.single('image'), isLoggedIn, async (req, res) => {
     console.error('Error creating portfolio:', err.message || err);
     console.error('Prisma Error Details:', err.meta); // Log Prisma-specific details
     req.flash('error', 'An error occurred while creating your portfolio. Please try again.');
-    res.redirect('/portfolio/new');
+    res.render('/portfolio/new');
   }
 });
 
@@ -461,48 +486,40 @@ app.post('/portfolio/:id/like', isLoggedIn, async (req, res) => {
 
 
 app.delete("/portfolio/:id", isLoggedIn, isOwner, async (req, res) => {
-  const { id: portfolioId } = req.params; // No parsing needed for String ID
+  const { id: portfolioId } = req.params;
 
   try {
-    // Find portfolio by ID
     const portfolio = await prisma.portfolio.findUnique({
       where: { id: portfolioId },
       include: { images: true },
     });
 
-    // If portfolio not found, return 404
     if (!portfolio) {
       req.flash("error", "Portfolio not found.");
-      return res.status(404).json({ error: "Portfolio not found" });
+      return res.redirect('/');
     }
 
-    // Delete related images explicitly (only if cascade delete is not configured)
     if (portfolio.images && portfolio.images.length > 0) {
-      await prisma.image.deleteMany({
-        where: { portfolioId },
-      });
+      await prisma.image.deleteMany({ where: { portfolioId } });
     }
 
-    // Delete the portfolio
-    await prisma.portfolio.delete({
-      where: { id: portfolioId },
-    });
+    await prisma.portfolio.delete({ where: { id: portfolioId } });
 
     req.flash("success", "Deleted Portfolio Successfully!");
+
+    // Check if it's an API request or full-page request
+    if (req.headers["x-requested-with"] === "XMLHttpRequest") {
+      return res.status(200).json({ message: "Portfolio deleted successfully!" });
+    }
+
     res.redirect('/');
   } catch (err) {
     console.error("Error deleting portfolio:", err);
-
-    if (err instanceof Prisma.PrismaClientKnownRequestError) {
-      // Handle known Prisma errors (e.g., constraint violations)
-      req.flash("error", "Database error occurred while deleting the portfolio.");
-      return res.status(400).json({ error: "Database error occurred" });
-    }
-
     req.flash("error", "An unexpected error occurred.");
-    res.redirect('/')
+    res.redirect('/');
   }
 });
+
 
 
 app.get('/portfolio/:id/edit', isLoggedIn, isOwner, async (req, res) => {
